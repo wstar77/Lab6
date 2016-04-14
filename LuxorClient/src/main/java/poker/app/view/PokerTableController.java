@@ -1,5 +1,6 @@
 package poker.app.view;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -7,7 +8,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 
-
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
@@ -40,10 +42,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import poker.app.MainApp;
+import pokerBase.Action;
 import pokerBase.Card;
 import pokerBase.Deck;
 import pokerBase.Hand;
 import pokerBase.Player;
+import pokerEnums.eAction;
 
 
 public class PokerTableController {
@@ -78,11 +82,31 @@ public class PokerTableController {
 		switch (btnFold.getId().toString())
 		{
 		case "btnPlayer1Fold":
-			mainApp.SendMessage("Fold Pressed, Player 1");
-			System.out.println("Fold Pressed, Player 1");
+			
+			Action act = new Action(eAction.Fold,mainApp.getPlayer());
+			String str = SerializeMe(act).toString();
+			
+			mainApp.SendMessage(str);
+			System.out.println(str);
 			break;
 		}
 	}
 	
+	
+	public StringWriter SerializeMe(Action act) {
+		StringWriter sw = new StringWriter();
+		try {
+			// Write it
+			JAXBContext ctx = JAXBContext.newInstance(Action.class);
+			Marshaller m = ctx.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			m.marshal(act, sw);
+			sw.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return sw;
+	}
 
 }
