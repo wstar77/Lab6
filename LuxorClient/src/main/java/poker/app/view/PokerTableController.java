@@ -106,9 +106,9 @@ public class PokerTableController {
 		case "btnPos1SitLeave":
 			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.ONE.getiPlayerPosition());			
 			act.setiPlayerPosition(ePlayerPosition.ONE.getiPlayerPosition());
-			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
-			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
-			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
+			//btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
+			//btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
+			//btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
 			break;
 		case "btnPos2SitLeave":
 			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.TWO.getiPlayerPosition());
@@ -122,18 +122,18 @@ public class PokerTableController {
 			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.THREE.getiPlayerPosition());
 			//lblPos3Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName() : "");
 			act.setiPlayerPosition(ePlayerPosition.THREE.getiPlayerPosition());
-			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
-			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
-			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
+			//btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
+			//btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
+			//btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
 
 			break;
 		case "btnPos4SitLeave":
 			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.FOUR.getiPlayerPosition());
 			//lblPos4Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName() : "");
 			act.setiPlayerPosition(ePlayerPosition.FOUR.getiPlayerPosition());
-			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
-			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
-			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
+			//btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
+			//btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
+			//btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
 
 			break;
 		}
