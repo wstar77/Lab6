@@ -52,13 +52,20 @@ public class PokerHub extends Hub {
 				sendToAll(HubPokerTable);
 				break;
 			case Sit:
-				System.out.println("Sitting player " + act.getPlayer().getPlayerName());
-				HubPokerTable.AddPlayerToTable(act.getPlayer());
-				sendToAll(act.getPlayer() + " seated");
+				System.out.println("Sitting player " + act.getPlayer().getPlayerName());				
+				HubPokerTable.AddPlayerToTable(act.getPlayer());				
+				sendToAll(HubPokerTable);
+				//sendToAll(act.getPlayer() + " seated");
 				break;
 			case Leave:
 				System.out.println("Removing player " + act.getPlayer().getPlayerName());
+
+				System.out.println("State of table before player removed");
+				Table.StateOfTable(HubPokerTable);				
 				HubPokerTable.RemovePlayerFromTable(act.getPlayer());
+				System.out.println("State of table after player removed");
+				Table.StateOfTable(HubPokerTable);
+				sendToAll(HubPokerTable);
 				break;
 			case StartGame:
 				System.out.println("Starting Game!");

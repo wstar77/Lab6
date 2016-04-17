@@ -43,6 +43,7 @@ public class MainApp extends Application {
 	private PokerHub pHub = null;
 	private PokerClient pClient = null;
 
+	private PokerTableController pokerController = null;
 	private RootLayoutController rootController = null;
 
 	private boolean isServer = false;
@@ -180,8 +181,9 @@ public class MainApp extends Application {
 			rootLayout.setCenter(pokerOverview);
 
 			// Give the controller access to the main app.
-			PokerTableController controller = loader.getController();
-			controller.setMainApp(this);
+			//PokerTableController controller = loader.getController();
+			pokerController = loader.getController();
+			pokerController.setMainApp(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -264,13 +266,17 @@ public class MainApp extends Application {
 			System.out.println("Receiving message " + getID() );
 			Platform.runLater(() -> {		
 				if (message instanceof String)
-				{	
+				{				
 					System.out.println("Message Received " + message);
 				}
 				else if (message instanceof Table)
-				{
-					String str = SerializeMe((Table)message);
-					System.out.println(str);
+				{				
+					System.out.println("State of table, message receieved by client");
+					Table.StateOfTable((Table)message);	
+					
+					pokerController.btnSitLeave_response((Table)message);
+					//String str = SerializeMe((Table)message);
+					//System.out.println(str);
 				}
 			});
 		}

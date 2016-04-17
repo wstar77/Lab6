@@ -3,6 +3,8 @@ package poker.app.view;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -45,8 +47,10 @@ import poker.app.MainApp;
 import pokerBase.Action;
 import pokerBase.Card;
 import pokerBase.Deck;
+import pokerBase.GamePlayPlayerHand;
 import pokerBase.Hand;
 import pokerBase.Player;
+import pokerBase.Table;
 import pokerEnums.eAction;
 import pokerEnums.ePlayerPosition;
 
@@ -58,17 +62,24 @@ public class PokerTableController {
 	public PokerTableController() {
 	}
 
-	@FXML private  ToggleButton btnPos1SitLeave;
-	@FXML private  ToggleButton btnPos2SitLeave;
-	@FXML private  ToggleButton btnPos3SitLeave;
-	@FXML private  ToggleButton btnPos4SitLeave;
-	
-	@FXML private Label lblPos1Name;
-	@FXML private Label lblPos2Name;
-	@FXML private Label lblPos3Name;
-	@FXML private Label lblPos4Name;
-	
-	
+	@FXML
+	private ToggleButton btnPos1SitLeave;
+	@FXML
+	private ToggleButton btnPos2SitLeave;
+	@FXML
+	private ToggleButton btnPos3SitLeave;
+	@FXML
+	private ToggleButton btnPos4SitLeave;
+
+	@FXML
+	private Label lblPos1Name;
+	@FXML
+	private Label lblPos2Name;
+	@FXML
+	private Label lblPos3Name;
+	@FXML
+	private Label lblPos4Name;
+
 	@FXML
 	private void initialize() {
 	}
@@ -81,32 +92,35 @@ public class PokerTableController {
 	@FXML
 	private void handlePlay() {
 	}
+
 	@FXML
-	public void GetGameState()
-	{
+	public void GetGameState() {
 		Action act = new Action(eAction.GameState, mainApp.getPlayer());
 		mainApp.messageSend(act);
 	}
+
 	public void btnSitLeave_click(ActionEvent event) {
 		ToggleButton btnSitLeave = (ToggleButton) event.getSource();
-		Action act = new Action(btnSitLeave.isSelected() ? eAction.Sit : eAction.Leave, mainApp.getPlayer());		
+		Action act = new Action(btnSitLeave.isSelected() ? eAction.Sit : eAction.Leave, mainApp.getPlayer());
 		switch (btnSitLeave.getId().toString()) {
-		case "btnPos1SitLeave":			
-			lblPos1Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName(): "");				
+		case "btnPos1SitLeave":
+			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.ONE.getiPlayerPosition());			
 			act.setiPlayerPosition(ePlayerPosition.ONE.getiPlayerPosition());
 			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
 			break;
 		case "btnPos2SitLeave":
-			lblPos2Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName(): "");			
+			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.TWO.getiPlayerPosition());
+			//lblPos2Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName() : "");
 			act.setiPlayerPosition(ePlayerPosition.TWO.getiPlayerPosition());
 			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
-			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());			
+			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
 			break;
 		case "btnPos3SitLeave":
-			lblPos3Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName(): "");
+			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.THREE.getiPlayerPosition());
+			//lblPos3Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName() : "");
 			act.setiPlayerPosition(ePlayerPosition.THREE.getiPlayerPosition());
 			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
@@ -114,7 +128,8 @@ public class PokerTableController {
 
 			break;
 		case "btnPos4SitLeave":
-			lblPos4Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName(): "");
+			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.FOUR.getiPlayerPosition());
+			//lblPos4Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName() : "");
 			act.setiPlayerPosition(ePlayerPosition.FOUR.getiPlayerPosition());
 			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
@@ -125,25 +140,36 @@ public class PokerTableController {
 		mainApp.messageSend(act);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void btnSitLeave_response(Table HubPokerTable) {
+
+		System.out.println("Executing: btnSitLeave_response");
+		lblPos1Name.setText("");
+		lblPos2Name.setText("");
+		lblPos3Name.setText("");
+		lblPos4Name.setText("");
+		
+		Iterator it = HubPokerTable.getHashPlayers().entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			Player p = (Player) pair.getValue();
+			switch (p.getiPlayerPosition())
+			{
+			case 1:
+				lblPos1Name.setText(p.getPlayerName().toString());
+				break;
+			case 2:
+				lblPos2Name.setText(p.getPlayerName().toString());
+				break;
+			case 3:
+				lblPos3Name.setText(p.getPlayerName().toString());
+				break;
+			case 4:
+				lblPos4Name.setText(p.getPlayerName().toString());
+				break;
+			}
+		}
+	}
+
 	@FXML
 	void btnStart(ActionEvent event) {
 		Action act = new Action(eAction.StartGame, mainApp.getPlayer());
