@@ -63,6 +63,10 @@ public class PokerTableController {
 	@FXML private  ToggleButton btnPos3SitLeave;
 	@FXML private  ToggleButton btnPos4SitLeave;
 	
+	@FXML private Label lblPos1Name;
+	@FXML private Label lblPos2Name;
+	@FXML private Label lblPos3Name;
+	@FXML private Label lblPos4Name;
 	
 	
 	@FXML
@@ -87,19 +91,22 @@ public class PokerTableController {
 		ToggleButton btnSitLeave = (ToggleButton) event.getSource();
 		Action act = new Action(btnSitLeave.isSelected() ? eAction.Sit : eAction.Leave, mainApp.getPlayer());		
 		switch (btnSitLeave.getId().toString()) {
-		case "btnPos1SitLeave":
+		case "btnPos1SitLeave":			
+			lblPos1Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName(): "");				
 			act.setiPlayerPosition(ePlayerPosition.ONE.getiPlayerPosition());
 			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
 			break;
 		case "btnPos2SitLeave":
+			lblPos2Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName(): "");			
 			act.setiPlayerPosition(ePlayerPosition.TWO.getiPlayerPosition());
 			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());			
 			break;
 		case "btnPos3SitLeave":
+			lblPos3Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName(): "");
 			act.setiPlayerPosition(ePlayerPosition.THREE.getiPlayerPosition());
 			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
@@ -107,6 +114,7 @@ public class PokerTableController {
 
 			break;
 		case "btnPos4SitLeave":
+			lblPos4Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName(): "");
 			act.setiPlayerPosition(ePlayerPosition.FOUR.getiPlayerPosition());
 			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
 			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
