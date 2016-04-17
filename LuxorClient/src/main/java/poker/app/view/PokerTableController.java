@@ -48,7 +48,7 @@ import pokerBase.Deck;
 import pokerBase.Hand;
 import pokerBase.Player;
 import pokerEnums.eAction;
-
+import pokerEnums.ePlayerPosition;
 
 public class PokerTableController {
 
@@ -58,41 +58,116 @@ public class PokerTableController {
 	public PokerTableController() {
 	}
 
+	@FXML private  ToggleButton btnPos1SitLeave;
+	@FXML private  ToggleButton btnPos2SitLeave;
+	@FXML private  ToggleButton btnPos3SitLeave;
+	@FXML private  ToggleButton btnPos4SitLeave;
+	
+	
+	
 	@FXML
 	private void initialize() {
 	}
-	
+
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 
-
 	}
+
 	@FXML
 	private void handlePlay() {
+	}
+	@FXML
+	public void GetGameState()
+	{
+		Action act = new Action(eAction.GameState, mainApp.getPlayer());
+		mainApp.messageSend(act);
+	}
+	public void btnSitLeave_click(ActionEvent event) {
+		ToggleButton btnSitLeave = (ToggleButton) event.getSource();
+		Action act = new Action(btnSitLeave.isSelected() ? eAction.Sit : eAction.Leave, mainApp.getPlayer());		
+		switch (btnSitLeave.getId().toString()) {
+		case "btnPos1SitLeave":
+			act.setiPlayerPosition(ePlayerPosition.ONE.getiPlayerPosition());
+			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
+			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
+			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
+			break;
+		case "btnPos2SitLeave":
+			act.setiPlayerPosition(ePlayerPosition.TWO.getiPlayerPosition());
+			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
+			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
+			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());			
+			break;
+		case "btnPos3SitLeave":
+			act.setiPlayerPosition(ePlayerPosition.THREE.getiPlayerPosition());
+			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
+			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
+			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
 
+			break;
+		case "btnPos4SitLeave":
+			act.setiPlayerPosition(ePlayerPosition.FOUR.getiPlayerPosition());
+			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
+			btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
+			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
+
+			break;
+		}
+		mainApp.messageSend(act);
 	}
 
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@FXML
-	public void btnFold(ActionEvent event)
-	{
+	void btnStart(ActionEvent event) {
+		Action act = new Action(eAction.StartGame, mainApp.getPlayer());
+		mainApp.messageSend(act);
+	}
+
+	@FXML
+	void btnDeal_Click(ActionEvent event) {
+		Action act = new Action(eAction.Deal, mainApp.getPlayer());
+		mainApp.messageSend(act);
+	}
+
+	@FXML
+	public void btnFold(ActionEvent event) {
 		Button btnFold = (Button) event.getSource();
-		
-		switch (btnFold.getId().toString())
-		{
+
+		switch (btnFold.getId().toString()) {
 		case "btnPlayer1Fold":
-			
-			Action act = new Action(eAction.Fold,mainApp.getPlayer());
-			String str = SerializeMe(act).toString();
-			
-			mainApp.SendMessage(str);
-			System.out.println(str);
+			System.out.println("Player Number: " + mainApp.GetPlayerID());
+			mainApp.messageSend("Test 123");
+
+			/*
+			 * Action act = new Action(eAction.Fold,mainApp.getPlayer()); String
+			 * str = SerializeMe(act).toString();
+			 * 
+			 * mainApp.SendMessage(str); System.out.println(str);
+			 */
+
 			break;
 		}
 	}
-	
-	
+
 	public StringWriter SerializeMe(Action act) {
 		StringWriter sw = new StringWriter();
 		try {

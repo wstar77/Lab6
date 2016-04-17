@@ -1,19 +1,20 @@
 package poker.app.view;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import poker.app.MainApp;
-import base.Main;
 import pokerBase.Action;
 import pokerEnums.eAction;
 
 public class ClientServerStartController {
-
- 
 	
+	@FXML private TextField txtPlayerName;
+	@FXML private RadioButton rbtnServer;
+	@FXML private RadioButton rbtnClient;
 	@FXML private TextField txtServerPort;
 	@FXML private TextField txtClientPort;
 	@FXML private TextField txtComputerName;
@@ -41,14 +42,35 @@ public class ClientServerStartController {
 			txtComputerName.setDisable(!rbServerClient.isSelected());
 			
 			break;
-			
 		}
-
 	}
 	
 	@FXML
 	public void btnOK(ActionEvent event)
 	{
-		mainApp.showPoker();
+		int iPort = 0;
+		String strComputerName = "localhost";
+		boolean bServer = false;		
+		if (rbtnServer.isSelected())
+		{
+			bServer = true;
+			iPort = Integer.parseInt(txtServerPort.getText());
+		}
+		else if (rbtnClient.isSelected())
+		{
+			strComputerName = txtComputerName.getText();
+			iPort = Integer.parseInt(txtClientPort.getText());
+		}		
+		mainApp.showPoker(bServer, strComputerName, iPort, txtPlayerName.getText());
+	}
+	
+	@FXML
+	public void btnCancel(ActionEvent event)
+	{
+		Platform.exit();
+        System.exit(0);
+        
+		System.out.println("End Program");
+
 	}
 }

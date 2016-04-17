@@ -1,5 +1,6 @@
 package pokerBase;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -7,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import pokerEnums.eRank;
 import pokerEnums.eSuit;
 
-public class Card implements Comparable {
+public class Card implements Comparable,  Serializable {
 
 	@XmlElement
 	private eSuit eSuit;

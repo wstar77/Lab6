@@ -1,23 +1,38 @@
 package pokerBase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
-public class Table {
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Table implements Serializable {
 	
+	@XmlElement
 	private UUID TableID;
-	private ArrayList<Player> players = new ArrayList<Player>();
+	
+	@XmlElement
+	private HashMap HashMapPlayer = new HashMap<UUID, Player>();
 	
 	public Table()
 	{
 		TableID = UUID.randomUUID();
 	}
-	
 	public Table AddPlayerToTable(Player p)
 	{
-		players.add(p);
+		HashMapPlayer.put(p.getPlayerID(), p);
 		return this;
 	}
-	
-	
+	public Table RemovePlayerFromTable(Player p)
+	{
+		HashMapPlayer.remove(p.getPlayerID());
+		return this;
+	}
+	public HashMap getHashPlayers() {
+		return HashMapPlayer;
+	}
 }

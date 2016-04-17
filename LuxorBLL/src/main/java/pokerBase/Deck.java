@@ -1,5 +1,6 @@
 package pokerBase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -14,7 +15,7 @@ import pokerEnums.eSuit;
  * @author Bert.Gibbons
  *
  */
-public class Deck  {
+public class Deck implements Serializable  {
 
 	/**
 	 * 

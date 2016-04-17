@@ -49,6 +49,7 @@ public class Hand  {
 		return CardsInHand;
 	}
 
+
 	private void setCardsInHand(ArrayList<Card> cardsInHand) {
 		CardsInHand = cardsInHand;
 	}
@@ -88,7 +89,7 @@ public class Hand  {
 		this.bScored = bScored;
 	}
 
-	private Hand AddCardToHand(Card c) {
+	Hand AddCardToHand(Card c) {
 		CardsInHand.add(c);
 		return this;
 	}
