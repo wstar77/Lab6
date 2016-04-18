@@ -26,8 +26,8 @@
                      <children>
                         <FlowPane prefHeight="56.0" prefWidth="328.0">
                            <children>
-                              <Button id="btnPlayer1Fold" mnemonicParsing="false" onAction="#btnFold" prefWidth="80.0" text="Fold" />
-                              <Button mnemonicParsing="false" prefWidth="80.0" text="Check" />
+                              <Button id="btnPlayer1Fold" mnemonicParsing="false" onAction="#btnFold_Click" prefWidth="80.0" text="Fold" />
+                              <Button mnemonicParsing="false" onAction="#btnCheck_Click" prefWidth="80.0" text="Check" />
                               <Button mnemonicParsing="false" prefWidth="80.0" text="Bet" />
                               <Button id="btnPlayer1Fold" mnemonicParsing="false" prefWidth="80.0" text="Raise" />
                            </children>
@@ -51,7 +51,7 @@
                      <children>
                         <FlowPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ToggleButton id="btnPos1SitLeave" fx:id="btnPos1SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
+                              <ToggleButton id="btnPos1SitLeave" fx:id="btnPos1SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_Click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
                            </children>
                         </FlowPane>
                      </children>
@@ -81,8 +81,8 @@
                   </HBox>
                   <FlowPane prefHeight="50.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button id="btnPlayer1Fold" mnemonicParsing="false" onAction="#btnFold" prefWidth="80.0" text="Fold" />
-                        <Button mnemonicParsing="false" prefWidth="80.0" text="Check" />
+                        <Button id="btnPlayer1Fold" mnemonicParsing="false" onAction="#btnFold_Click" prefWidth="80.0" text="Fold" />
+                        <Button mnemonicParsing="false" onAction="#btnCheck_Click" prefWidth="80.0" text="Check" />
                         <Button mnemonicParsing="false" prefWidth="80.0" text="Bet" />
                         <Button id="btnPlayer1Fold" mnemonicParsing="false" prefWidth="80.0" text="Raise" />
                      </children>
@@ -90,7 +90,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <ToggleButton id="btnPos3SitLeave" fx:id="btnPos3SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
+                        <ToggleButton id="btnPos3SitLeave" fx:id="btnPos3SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_Click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
                      </children>
                   </HBox>
                </children>
@@ -116,7 +116,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button id="btnStart" mnemonicParsing="false" onAction="#btnStart" prefWidth="80.0" text="Start" />
+                        <Button id="btnStart" mnemonicParsing="false" onAction="#btnStart_Click" prefWidth="80.0" text="Start" />
                         <Button id="btnDeal" mnemonicParsing="false" onAction="#btnDeal_Click" prefWidth="80.0" text="Deal" />
                      </children>
                   </HBox>
@@ -143,8 +143,8 @@
                      <children>
                         <FlowPane prefHeight="112.0" prefWidth="333.0">
                            <children>
-                              <Button id="btnPlayer1Fold" mnemonicParsing="false" onAction="#btnFold" prefWidth="80.0" text="Fold" />
-                              <Button mnemonicParsing="false" prefWidth="80.0" text="Check" />
+                              <Button id="btnPlayer1Fold" mnemonicParsing="false" onAction="#btnFold_Click" prefWidth="80.0" text="Fold" />
+                              <Button mnemonicParsing="false" onAction="#btnCheck_Click" prefWidth="80.0" text="Check" />
                               <Button mnemonicParsing="false" prefWidth="80.0" text="Bet" />
                               <Button id="btnPlayer1Fold" mnemonicParsing="false" prefWidth="80.0" text="Raise" />
                            </children>
@@ -168,7 +168,7 @@
                      <children>
                         <FlowPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ToggleButton id="btnPos2SitLeave" fx:id="btnPos2SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
+                              <ToggleButton id="btnPos2SitLeave" fx:id="btnPos2SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_Click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
                            </children>
                         </FlowPane>
                      </children>
@@ -195,8 +195,8 @@
                      <children>
                         <FlowPane prefHeight="112.0" prefWidth="333.0">
                            <children>
-                              <Button id="btnPlayer1Fold" mnemonicParsing="false" onAction="#btnFold" prefWidth="80.0" text="Fold" />
-                              <Button mnemonicParsing="false" prefWidth="80.0" text="Check" />
+                              <Button id="btnPlayer1Fold" mnemonicParsing="false" onAction="#btnFold_Click" prefWidth="80.0" text="Fold" />
+                              <Button mnemonicParsing="false" onAction="#btnCheck_Click" prefWidth="80.0" text="Check" />
                               <Button mnemonicParsing="false" prefWidth="80.0" text="Bet" />
                               <Button id="btnPlayer1Fold" mnemonicParsing="false" prefWidth="80.0" text="Raise" />
                            </children>
@@ -220,7 +220,7 @@
                      <children>
                         <FlowPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ToggleButton id="btnPos4SitLeave" fx:id="btnPos4SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
+                              <ToggleButton id="btnPos4SitLeave" fx:id="btnPos4SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_Click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
                            </children>
                         </FlowPane>
                      </children>

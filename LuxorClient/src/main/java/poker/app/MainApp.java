@@ -205,49 +205,11 @@ public class MainApp extends Application {
 		//connection.closeConnection();
 	}
 
-/*	private Client createClient() {
-		return new Client("127.0.0.1", 55555, data -> {
-			Platform.runLater(() -> {
-				System.out.println("Data Receieved By Client " + data.toString() + "\n");
-				// messages.appendText(data.toString() + "\n");
-			});
-		});
-	}*/
-
 	public void messageSend(final Object message)
 	{
 		System.out.println("Sending message " + pClient.getID() );
 		pClient.messageSend(message);	
 	}
-	
-	
-	public void messageReceived(final Object message) {
-		if (message instanceof PokerGameState) {
-			Platform.runLater(new Runnable() {
-				public void run() {
-					newState((PokerGameState) message);
-				}
-			});
-		}
-	}
-
-	private void newState(PokerGameState state) {
-
-	}
-
-	/*
-	public void SendMessage(String message) {
-		try {
-			connection.send(message);
-		} catch (Exception e) {
-			System.out.println("Message failed to send");
-			e.printStackTrace();
-			messages.appendText("Failed to send\n");
-		}
-	}
-	*/
-
-	
 	
 	private class PokerClient extends Client {
 
@@ -255,14 +217,24 @@ public class MainApp extends Application {
 			super(hubHostName, hubPort);
 		}
 
+		/*
+		 * messageSend - One single place to send messages
+		 */
 		protected void messageSend(Object message)
 		{
 			System.out.println("PokerClient.messageSend");
 			super.send(message);
 		}
 		
+		/*
+		 * messageReceived will get an Object message... it's up to you to determine
+		 * what should happen to that the message.
+		 * 
+		 * If it's a Table, handle Table - level action
+		 * If it's a GamePlay, handle GamePlay - level action
+		 */
 		@Override
-		protected void messageReceived(Object message) {
+		protected void messageReceived(final Object message) {
 			System.out.println("Receiving message " + getID() );
 			Platform.runLater(() -> {		
 				if (message instanceof String)
@@ -271,33 +243,20 @@ public class MainApp extends Application {
 				}
 				else if (message instanceof Table)
 				{				
-					System.out.println("State of table, message receieved by client");
-					Table.StateOfTable((Table)message);	
+					System.out.println("State of table: message receieved by client");
+					System.out.println("MainApp PlayerID: " + getPlayer().getPlayerID());
+					Table.StateOfTable((Table)message);						
+					pokerController.btnSitLeave_Response((Table)message);
 					
-					pokerController.btnSitLeave_response((Table)message);
-					//String str = SerializeMe((Table)message);
-					//System.out.println(str);
 				}
 			});
 		}
 		
-		public String SerializeMe(Table tbl) {
-			StringWriter sw = new StringWriter();
-			try {
-				// Write it
-				JAXBContext ctx = JAXBContext.newInstance(Table.class);
-				Marshaller m = ctx.createMarshaller();
-				m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-				m.marshal(tbl, sw);
-				sw.close();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-			return sw.toString();
-		}
 		
 		@Override
+		/*
+		 * serverShutdown - Call the hard exit.
+		 */
 	    protected void serverShutdown(String message) {
 	    	
 			Platform.runLater(() -> {		

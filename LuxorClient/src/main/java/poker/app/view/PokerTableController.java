@@ -99,71 +99,108 @@ public class PokerTableController {
 		mainApp.messageSend(act);
 	}
 
-	public void btnSitLeave_click(ActionEvent event) {
+	public void btnSitLeave_Click(ActionEvent event) {
 		ToggleButton btnSitLeave = (ToggleButton) event.getSource();
-		Action act = new Action(btnSitLeave.isSelected() ? eAction.Sit : eAction.Leave, mainApp.getPlayer());
-		switch (btnSitLeave.getId().toString()) {
-		case "btnPos1SitLeave":
-			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.ONE.getiPlayerPosition());			
-			act.setiPlayerPosition(ePlayerPosition.ONE.getiPlayerPosition());
-			//btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
-			//btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
-			//btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
-			break;
-		case "btnPos2SitLeave":
-			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.TWO.getiPlayerPosition());
-			//lblPos2Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName() : "");
-			act.setiPlayerPosition(ePlayerPosition.TWO.getiPlayerPosition());
-			btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
-			btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
-			btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
-			break;
-		case "btnPos3SitLeave":
-			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.THREE.getiPlayerPosition());
-			//lblPos3Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName() : "");
-			act.setiPlayerPosition(ePlayerPosition.THREE.getiPlayerPosition());
-			//btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
-			//btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
-			//btnPos4SitLeave.setVisible(!btnSitLeave.isSelected());
-
-			break;
-		case "btnPos4SitLeave":
-			mainApp.getPlayer().setiPlayerPosition(ePlayerPosition.FOUR.getiPlayerPosition());
-			//lblPos4Name.setText(btnSitLeave.isSelected() ? mainApp.getPlayer().getPlayerName() : "");
-			act.setiPlayerPosition(ePlayerPosition.FOUR.getiPlayerPosition());
-			//btnPos1SitLeave.setVisible(!btnSitLeave.isSelected());
-			//btnPos2SitLeave.setVisible(!btnSitLeave.isSelected());
-			//btnPos3SitLeave.setVisible(!btnSitLeave.isSelected());
-
-			break;
+		int iPlayerPosition = 0;
+		if (btnSitLeave.isSelected()) {
+			switch (btnSitLeave.getId().toString()) {
+			case "btnPos1SitLeave":
+				iPlayerPosition = ePlayerPosition.ONE.getiPlayerPosition();
+				break;
+			case "btnPos2SitLeave":
+				iPlayerPosition = ePlayerPosition.TWO.getiPlayerPosition();
+				break;
+			case "btnPos3SitLeave":
+				iPlayerPosition = ePlayerPosition.THREE.getiPlayerPosition();
+				break;
+			case "btnPos4SitLeave":
+				iPlayerPosition = ePlayerPosition.FOUR.getiPlayerPosition();
+				break;
+			}
 		}
+		else
+		{
+			iPlayerPosition = 0;
+		}
+		
+		mainApp.getPlayer().setiPlayerPosition(iPlayerPosition);
+		Action act = new Action(btnSitLeave.isSelected() ? eAction.Sit : eAction.Leave, mainApp.getPlayer());
+		act.setiPlayerPosition(iPlayerPosition);
+
 		mainApp.messageSend(act);
 	}
 
-	public void btnSitLeave_response(Table HubPokerTable) {
-
-		System.out.println("Executing: btnSitLeave_response");
+	public void btnSitLeave_Response(Table HubPokerTable) {
+	
 		lblPos1Name.setText("");
 		lblPos2Name.setText("");
 		lblPos3Name.setText("");
 		lblPos4Name.setText("");
 		
+		btnPos1SitLeave.setVisible(true);
+		btnPos2SitLeave.setVisible(true);
+		btnPos3SitLeave.setVisible(true);
+		btnPos4SitLeave.setVisible(true);
+		
 		Iterator it = HubPokerTable.getHashPlayers().entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry pair = (Map.Entry) it.next();
 			Player p = (Player) pair.getValue();
-			switch (p.getiPlayerPosition())
-			{
+			switch (p.getiPlayerPosition()) {
 			case 1:
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID()))
+				{
+					btnPos1SitLeave.setVisible(true);
+					btnPos2SitLeave.setVisible(false);
+					btnPos3SitLeave.setVisible(false);
+					btnPos4SitLeave.setVisible(false);
+				}
+				else
+				{
+					btnPos1SitLeave.setVisible(false);
+				}
 				lblPos1Name.setText(p.getPlayerName().toString());
 				break;
 			case 2:
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID()))
+				{
+					btnPos1SitLeave.setVisible(false);
+					btnPos2SitLeave.setVisible(true);
+					btnPos3SitLeave.setVisible(false);
+					btnPos4SitLeave.setVisible(false);
+				}		
+				else
+				{
+					btnPos2SitLeave.setVisible(false);
+				}				
 				lblPos2Name.setText(p.getPlayerName().toString());
 				break;
 			case 3:
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID()))
+				{
+					btnPos1SitLeave.setVisible(false);
+					btnPos2SitLeave.setVisible(false);
+					btnPos3SitLeave.setVisible(true);
+					btnPos4SitLeave.setVisible(false);
+				}		
+				else
+				{
+					btnPos3SitLeave.setVisible(false);
+				}				
 				lblPos3Name.setText(p.getPlayerName().toString());
 				break;
 			case 4:
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID()))
+				{
+					btnPos1SitLeave.setVisible(false);
+					btnPos2SitLeave.setVisible(false);
+					btnPos3SitLeave.setVisible(false);
+					btnPos4SitLeave.setVisible(true);
+				}		
+				else
+				{
+					btnPos4SitLeave.setVisible(false);
+				}				
 				lblPos4Name.setText(p.getPlayerName().toString());
 				break;
 			}
@@ -171,7 +208,7 @@ public class PokerTableController {
 	}
 
 	@FXML
-	void btnStart(ActionEvent event) {
+	void btnStart_Click(ActionEvent event) {
 		Action act = new Action(eAction.StartGame, mainApp.getPlayer());
 		mainApp.messageSend(act);
 	}
@@ -183,39 +220,22 @@ public class PokerTableController {
 	}
 
 	@FXML
-	public void btnFold(ActionEvent event) {
+	public void btnFold_Click(ActionEvent event) {
 		Button btnFold = (Button) event.getSource();
-
-		switch (btnFold.getId().toString()) {
-		case "btnPlayer1Fold":
-			System.out.println("Player Number: " + mainApp.GetPlayerID());
-			mainApp.messageSend("Test 123");
-
-			/*
-			 * Action act = new Action(eAction.Fold,mainApp.getPlayer()); String
-			 * str = SerializeMe(act).toString();
-			 * 
-			 * mainApp.SendMessage(str); System.out.println(str);
-			 */
-
-			break;
-		}
+		Action act = new Action(eAction.Fold, mainApp.getPlayer());
+		act.setiPlayerPosition(mainApp.getPlayer().getiPlayerPosition());
+		mainApp.messageSend(act);		
 	}
+	
+	@FXML
+	public void btnCheck_Click(ActionEvent event) {
+		Button btnFold = (Button) event.getSource();
+		Action act = new Action(eAction.Fold, mainApp.getPlayer());
+		act.setiPlayerPosition(mainApp.getPlayer().getiPlayerPosition());
+		mainApp.messageSend(act);		
+	}	
 
-	public StringWriter SerializeMe(Action act) {
-		StringWriter sw = new StringWriter();
-		try {
-			// Write it
-			JAXBContext ctx = JAXBContext.newInstance(Action.class);
-			Marshaller m = ctx.createMarshaller();
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			m.marshal(act, sw);
-			sw.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 
-		return sw;
-	}
 
 }
+

@@ -32,12 +32,23 @@ public class Table implements Serializable {
 	public Table RemovePlayerFromTable(Player p)
 	{
 		HashMapPlayer.remove(p.getPlayerID());
-		return this;
+		return this;	
 	}
 	public HashMap getHashPlayers() {
 		return HashMapPlayer;
 	}
-	
+	public static Table CloneTable(Table t)
+	{
+		Table t1 = new Table();
+		t1.TableID = t.TableID;
+		Iterator it = t.getHashPlayers().entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			t1.AddPlayerToTable((Player)pair.getValue());
+		}
+		
+		return t1;
+	}
 	public static void StateOfTable(Table t)
 	{
 		System.out.println("----------------------");

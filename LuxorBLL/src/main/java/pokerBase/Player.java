@@ -43,7 +43,8 @@ public class Player implements Serializable  {
 	public int getiPlayerPosition() {
 		return iPlayerPosition;
 	}
-	public void setiPlayerPosition(int iPlayerPosition) {
+	public Player setiPlayerPosition(int iPlayerPosition) {
 		this.iPlayerPosition = iPlayerPosition;
+		return this;
 	}	
 }
