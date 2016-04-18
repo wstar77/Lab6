@@ -123,6 +123,8 @@
                </children>
             </GridPane>
             <Button id="btnGetState" layoutX="191.0" layoutY="287.0" mnemonicParsing="false" onAction="#GetGameState" text="Get State" />
+            <Label id="lblNumberOfPlayers" fx:id="lblNumberOfPlayers" layoutX="28.0" layoutY="27.0" prefHeight="21.0" prefWidth="127.0" />
+            <TextArea fx:id="txtPlayerArea" layoutX="14.0" layoutY="48.0" prefHeight="89.0" prefWidth="421.0" />
          </children>
       </AnchorPane>
    </center>

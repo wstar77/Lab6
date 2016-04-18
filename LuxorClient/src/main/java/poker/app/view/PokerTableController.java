@@ -34,6 +34,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -63,6 +64,10 @@ public class PokerTableController {
 	}
 
 	@FXML
+	private Label lblNumberOfPlayers;
+	@FXML
+	private TextArea txtPlayerArea;
+	@FXML
 	private ToggleButton btnPos1SitLeave;
 	@FXML
 	private ToggleButton btnPos2SitLeave;
@@ -89,6 +94,16 @@ public class PokerTableController {
 
 	}
 
+	public void setlblNumberOfPlayers(Table tbl)
+	{
+		Iterator it = tbl.getHashPlayers().entrySet().iterator();
+		txtPlayerArea.setText("Table ID: " + tbl.getTableID().toString() + '\n');
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			Player p = (Player) pair.getValue();
+			txtPlayerArea.appendText("Player: " + p.getPlayerName() + "      Position: " + p.getiPlayerPosition() + "   ClientID: " + p.getiPokerClientID() + '\n');			
+		}
+	}
 	@FXML
 	private void handlePlay() {
 	}

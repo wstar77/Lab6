@@ -15,15 +15,19 @@ public class Player implements Serializable  {
 	@XmlElement
 	private int iPlayerPosition;
 	
+	@XmlElement
+	private int iPokerClientID;
+	
 	public Player()
 	{
 		
 	}
-	public Player(String strPlayerName)
+	public Player(String strPlayerName, int iPokerClientID)
 	{
 		PlayerID = UUID.randomUUID();
 		this.PlayerName = strPlayerName;
 		this.iPlayerPosition = iPlayerPosition;
+		this.iPokerClientID = iPokerClientID;
 	}
 	@XmlElement
 	public UUID getPlayerID() {
@@ -46,5 +50,9 @@ public class Player implements Serializable  {
 	public Player setiPlayerPosition(int iPlayerPosition) {
 		this.iPlayerPosition = iPlayerPosition;
 		return this;
+	}
+	public int getiPokerClientID() {
+		return iPokerClientID;
 	}	
+	
 }

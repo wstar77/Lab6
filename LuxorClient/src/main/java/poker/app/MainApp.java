@@ -107,8 +107,6 @@ public class MainApp extends Application {
 
 	public void showPoker(boolean bStartHub, String strComputerName, int iPort, String strPlayerName) {
 
-		setPlayer(new Player(strPlayerName));
-
 		if (bStartHub) {
 			try {
 				pHub = new PokerHub(iPort);
@@ -122,6 +120,8 @@ public class MainApp extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		setPlayer(new Player(strPlayerName, pClient.getID()));
 		
 		initRootLayout();
 
@@ -253,7 +253,7 @@ public class MainApp extends Application {
 					System.out.println("MainApp PlayerID: " + getPlayer().getPlayerID());
 					Table.StateOfTable((Table)message);						
 					pokerController.btnSitLeave_Response((Table)message);
-					
+					pokerController.setlblNumberOfPlayers((Table)message);
 				}
 			});
 		}

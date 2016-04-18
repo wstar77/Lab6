@@ -24,6 +24,13 @@ public class Table implements Serializable {
 	{
 		TableID = UUID.randomUUID();
 	}
+	
+	
+	public UUID getTableID() {
+		return TableID;
+	}
+
+
 	public Table AddPlayerToTable(Player p)
 	{
 		HashMapPlayer.put(p.getPlayerID(), p);
