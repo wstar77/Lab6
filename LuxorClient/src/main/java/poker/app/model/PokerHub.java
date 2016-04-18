@@ -51,6 +51,9 @@ public class PokerHub extends Hub {
 			case GameState:
 				sendToAll(HubPokerTable);
 				break;
+			case TableState:
+				resetOutput();
+				sendToAll(HubPokerTable);
 			case Sit:
 				resetOutput();
 				act.getPlayer().setiPlayerPosition(act.getiPlayerPosition());
@@ -62,6 +65,7 @@ public class PokerHub extends Hub {
 				HubPokerTable.RemovePlayerFromTable(act.getPlayer());
 				sendToAll(HubPokerTable);				
 				break;
+				
 			case StartGame:
 				System.out.println("Starting Game!");
 				// Get the Rule

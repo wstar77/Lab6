@@ -34,6 +34,7 @@ import pokerBase.Action;
 import pokerBase.GamePlay;
 import pokerBase.Player;
 import pokerBase.Table;
+import pokerEnums.eAction;
 
 public class MainApp extends Application {
 
@@ -124,7 +125,7 @@ public class MainApp extends Application {
 		
 		initRootLayout();
 
-		showPokerTable();
+		showPokerTable();		
 	}
 
 	public void showClientServer() {
@@ -184,6 +185,11 @@ public class MainApp extends Application {
 			//PokerTableController controller = loader.getController();
 			pokerController = loader.getController();
 			pokerController.setMainApp(this);
+			
+			getPlayer().setiPlayerPosition(0);
+			Action act = new Action(eAction.TableState, getPlayer());
+			act.setiPlayerPosition(0);
+			messageSend(act);
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -142,6 +142,11 @@ public class PokerTableController {
 		btnPos3SitLeave.setVisible(true);
 		btnPos4SitLeave.setVisible(true);
 		
+		btnPos1SitLeave.setText(btnPos1SitLeave.isSelected()? "Leave": "Sit");
+		btnPos2SitLeave.setText(btnPos2SitLeave.isSelected()? "Leave": "Sit");
+		btnPos3SitLeave.setText(btnPos3SitLeave.isSelected()? "Leave": "Sit");
+		btnPos4SitLeave.setText(btnPos4SitLeave.isSelected()? "Leave": "Sit");
+		
 		Iterator it = HubPokerTable.getHashPlayers().entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry pair = (Map.Entry) it.next();
