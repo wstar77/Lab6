@@ -2,7 +2,14 @@ package pokerBase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.UUID;
 
+import pokerEnums.eCardCount;
+import pokerEnums.eCardDestination;
+import pokerEnums.eCardVisibility;
+import pokerEnums.eDrawCount;
 import pokerEnums.eGame;
 import pokerEnums.eRank;
 import pokerEnums.eSuit;
@@ -17,8 +24,10 @@ public class Rule implements Serializable {
 		private int CommunityCardsMin;
 		private int CommunityCardsMax;
 		private int PossibleHandCombinations;
-		private int[] iCardsToDraw;
 		private ArrayList<Card> RuleCards = new ArrayList<Card>();
+		private HashMap hmCardDraw = new HashMap<Integer, CardDraw>();
+		
+		private LinkedList<CardDraw> CardDraw = new LinkedList<CardDraw>();
 		private eGame Game;
 
 		public Rule(eGame gme) {
@@ -33,8 +42,11 @@ public class Rule implements Serializable {
 				this.CommunityCardsMin = 0;
 				this.CommunityCardsMax = 0;	
 				this.PossibleHandCombinations = 1;
-				int[] iCardsToDraw = {2,1,1,1};
-				this.iCardsToDraw = iCardsToDraw;
+				this.hmCardDraw.put(eDrawCount.FIRST, new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.SECOND, new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.THIRD, new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.FOURTH, new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				
 				break;
 			}
 			case FiveStudOneJoker: {
@@ -46,8 +58,11 @@ public class Rule implements Serializable {
 				this.CommunityCardsMin = 0;
 				this.CommunityCardsMax = 0;
 				this.PossibleHandCombinations = 1;
-				int[] iCardsToDraw = {2,1,1,1};
-				this.iCardsToDraw = iCardsToDraw;			
+				this.hmCardDraw.put(eDrawCount.FIRST,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.SECOND,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.THIRD,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.FOURTH,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+		
 				break;
 			}
 			case FiveStudTwoJoker: {
@@ -59,8 +74,11 @@ public class Rule implements Serializable {
 				this.CommunityCardsMin = 0;
 				this.CommunityCardsMax = 0;
 				this.PossibleHandCombinations = 1;
-				int[] iCardsToDraw = {2,1,1,1};
-				this.iCardsToDraw = iCardsToDraw;			
+				this.hmCardDraw.put(eDrawCount.FIRST,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.SECOND,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.THIRD,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.FOURTH,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+			
 				break;
 			}
 			case TexasHoldEm: {
@@ -72,8 +90,10 @@ public class Rule implements Serializable {
 				this.CommunityCardsMin = 3;
 				this.CommunityCardsMax = 5;
 				this.PossibleHandCombinations = 21;
-				int[] iCardsToDraw = {2,3,1,1};
-				this.iCardsToDraw = iCardsToDraw;			
+				this.hmCardDraw.put(eDrawCount.FIRST,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.SECOND,new CardDraw(eCardCount.Three,eCardDestination.Community,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.THIRD,new CardDraw(eCardCount.One,eCardDestination.Community,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.FOURTH,new CardDraw(eCardCount.One,eCardDestination.Community,eCardVisibility.VisibleEveryone));
 				break;
 			}
 			case Omaha: {
@@ -85,8 +105,11 @@ public class Rule implements Serializable {
 				this.CommunityCardsMin = 3;
 				this.CommunityCardsMax = 5;
 				this.PossibleHandCombinations = 60;
-				int[] iCardsToDraw = {2,2,3,1,1};
-				this.iCardsToDraw = iCardsToDraw;				
+				this.hmCardDraw.put(eDrawCount.FIRST,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.SECOND,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.THIRD,new CardDraw(eCardCount.Three,eCardDestination.Community,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.FOURTH,new CardDraw(eCardCount.One,eCardDestination.Community,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.FIFTH,new CardDraw(eCardCount.One,eCardDestination.Community,eCardVisibility.VisibleEveryone));				
 				break;
 			}
 			case SuperOmaha: {
@@ -98,8 +121,12 @@ public class Rule implements Serializable {
 				this.CommunityCardsMin = 3;
 				this.CommunityCardsMax = 5;
 				this.PossibleHandCombinations = 81;
-				int[] iCardsToDraw = {2,2,3,1,1};
-				this.iCardsToDraw = iCardsToDraw;				
+				this.hmCardDraw.put(eDrawCount.FIRST,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.SECOND,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.THIRD,new CardDraw(eCardCount.Three,eCardDestination.Community,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.FOURTH,new CardDraw(eCardCount.One,eCardDestination.Community,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.FIFTH,new CardDraw(eCardCount.One,eCardDestination.Community,eCardVisibility.VisibleEveryone));
+			
 				break;
 			}		
 			case SevenDraw: {
@@ -111,8 +138,13 @@ public class Rule implements Serializable {
 				this.CommunityCardsMin = 0;
 				this.CommunityCardsMax = 0;
 				this.PossibleHandCombinations = 21;
-				int[] iCardsToDraw = {1,1,1,1,1,1,1};
-				this.iCardsToDraw = iCardsToDraw;				
+				this.hmCardDraw.put(eDrawCount.FIRST,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.SECOND,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.THIRD,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.FOURTH,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.FIFTH,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.SIXTH,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));				
+				
 				
 				break;
 			}		
@@ -129,8 +161,11 @@ public class Rule implements Serializable {
 				this.CommunityCardsMin = 0;
 				this.CommunityCardsMax = 0;
 				this.PossibleHandCombinations = 1;
-				int[] iCardsToDraw = {1,1,1,1,1};
-				this.iCardsToDraw = iCardsToDraw;				
+				this.hmCardDraw.put(eDrawCount.FIRST,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.SECOND,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.THIRD,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.FOURTH,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+			
 				break;
 			}
 			case AcesAndEights: {
@@ -150,8 +185,11 @@ public class Rule implements Serializable {
 				this.CommunityCardsMin = 0;
 				this.CommunityCardsMax = 0;
 				this.PossibleHandCombinations = 1;
-				int[] iCardsToDraw = {1,1,1,1,1};
-				this.iCardsToDraw = iCardsToDraw;							
+				this.hmCardDraw.put(eDrawCount.FIRST,new CardDraw(eCardCount.Two,eCardDestination.Player,eCardVisibility.VisibleEveryone));
+				this.hmCardDraw.put(eDrawCount.SECOND,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.THIRD,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+				this.hmCardDraw.put(eDrawCount.FOURTH,new CardDraw(eCardCount.One,eCardDestination.Player,eCardVisibility.VisibleMe));
+						
 				break;
 			}
 			}
@@ -226,14 +264,5 @@ public class Rule implements Serializable {
 
 		public void setPossibleHandCombinations(int possibleHandCombinations) {
 			PossibleHandCombinations = possibleHandCombinations;
-		}
-
-		public int[] getiCardsToDraw() {
-			return iCardsToDraw;
-		}
-
-		public void setiCardsToDraw(int[] iCardsToDraw) {
-			this.iCardsToDraw = iCardsToDraw;
-		}
-		
+		}		
 }

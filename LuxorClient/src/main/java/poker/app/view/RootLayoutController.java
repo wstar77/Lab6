@@ -20,6 +20,10 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 import poker.app.MainApp;
+import pokerBase.Card;
+import pokerEnums.eGame;
+import pokerEnums.eRank;
+import pokerEnums.eSuit;
 
 
 /**
@@ -40,35 +44,13 @@ public class RootLayoutController implements Initializable {
 	@FXML
 	private Menu mnuGame;
 
-	@FXML
-	private ToggleGroup tglGames;
-
-	@FXML
-	private RadioMenuItem Omaha = new RadioMenuItem();
-
-	@FXML
-	private RadioMenuItem Texas = new RadioMenuItem();
-
-	// Five Card Draw
-	@FXML
-	private RadioMenuItem FCD = new RadioMenuItem();
-
-	// Seven Card Draw
-	@FXML
-	private RadioMenuItem SCD = new RadioMenuItem();
-
-	@FXML
-	private RadioMenuItem oneJoker = new RadioMenuItem();
-
-	@FXML
-	private RadioMenuItem twoJoker = new RadioMenuItem();
 
 	public String getRuleName()
 	{	
 		String strRuleName = null;
 		for (Menu m: mb.getMenus())
 		{
-			if (m.getText() == "Games")
+			if (m.getText() == "Pick Game")
 			{
 				for (MenuItem mi: m.getItems())
 				{
@@ -90,12 +72,84 @@ public class RootLayoutController implements Initializable {
 	
 	public void initialize(URL location, ResourceBundle resources) {
 
-		Menu m = new Menu();
-		m.setText("Games");
-		mb.getMenus().add(0,m);
+		BuildMenus();
+	}
+	
+	public void BuildMenus()
+	{
+		Menu mnuGame = new Menu();
+		mnuGame.setText("Pick Game");
+		mb.getMenus().add(0,mnuGame);
+				
+		ToggleGroup tglGrpGame = new ToggleGroup();
+		
+		for (eGame eGame : eGame.values()) {
+			RadioMenuItem rmi = new RadioMenuItem(eGame.toString());
+			rmi.setId("PokerGame" + String.valueOf(eGame.getGame()));
+			rmi.setToggleGroup(tglGrpGame);
+			if (eGame.getDefault())
+			{
+				rmi.setSelected(true);
+			}
+			mnuGame.getItems().add(rmi);
+		}
+		
+		//	TODO - Lab #5...  Add a new menu item that will display the betting rules...
+		//	Two choices:
+		//	No Limit (set this as default)
+		//	Pot Limit (this is NOT the default)
+		//	Group them together with a Toggle Group
+		//	Write a method to return which is selected.. .check out getRuleName()
 
 	}
-
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
@@ -120,15 +174,6 @@ public class RootLayoutController implements Initializable {
 	}
 
 
-	public ToggleGroup getTglGames() {
-		return tglGames;
-	}
-	
-	
-
-	public void setTglGames(ToggleGroup tglGames) {
-		this.tglGames = tglGames;
-	}
 
 	
 

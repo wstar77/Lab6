@@ -70,7 +70,6 @@ public class Card implements Comparable,  Serializable {
 	   }};
 
 	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
 	    Card c = (Card) o; 
 	    return c.geteRank().compareTo(this.geteRank()); 
 

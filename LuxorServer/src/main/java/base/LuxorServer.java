@@ -94,7 +94,7 @@ public class LuxorServer extends Application {
                 try {
 					connection.send("Your turn");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
             });

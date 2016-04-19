@@ -41,13 +41,16 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import poker.app.MainApp;
 import pokerBase.Action;
 import pokerBase.Card;
 import pokerBase.Deck;
+import pokerBase.GamePlay;
 import pokerBase.GamePlayPlayerHand;
 import pokerBase.Hand;
 import pokerBase.Player;
@@ -62,11 +65,21 @@ public class PokerTableController {
 
 	public PokerTableController() {
 	}
+	
+	@FXML private ImageView imgViewDealerButtonPos1;
+	@FXML private ImageView imgViewDealerButtonPos2;
+	@FXML private ImageView imgViewDealerButtonPos3;
+	@FXML private ImageView imgViewDealerButtonPos4;
+	
+	@FXML private BorderPane OuterBorderPane;
 
 	@FXML
 	private Label lblNumberOfPlayers;
 	@FXML
 	private TextArea txtPlayerArea;
+
+	@FXML
+	private Button btnStartGame;
 	@FXML
 	private ToggleButton btnPos1SitLeave;
 	@FXML
@@ -87,6 +100,8 @@ public class PokerTableController {
 
 	@FXML
 	private void initialize() {
+		imgViewDealerButtonPos3.setVisible(true);
+		imgViewDealerButtonPos4.setVisible(true);
 	}
 
 	public void setMainApp(MainApp mainApp) {
@@ -94,16 +109,17 @@ public class PokerTableController {
 
 	}
 
-	public void setlblNumberOfPlayers(Table tbl)
-	{
+	public void setlblNumberOfPlayers(Table tbl) {
 		Iterator it = tbl.getHashPlayers().entrySet().iterator();
 		txtPlayerArea.setText("Table ID: " + tbl.getTableID().toString() + '\n');
 		while (it.hasNext()) {
 			Map.Entry pair = (Map.Entry) it.next();
 			Player p = (Player) pair.getValue();
-			txtPlayerArea.appendText("Player: " + p.getPlayerName() + "      Position: " + p.getiPlayerPosition() + "   ClientID: " + p.getiPokerClientID() + '\n');			
+			txtPlayerArea.appendText("Player: " + p.getPlayerName() + "      Position: " + p.getiPlayerPosition()
+					+ "   ClientID: " + p.getiPokerClientID() + '\n');
 		}
 	}
+
 	@FXML
 	private void handlePlay() {
 	}
@@ -132,12 +148,10 @@ public class PokerTableController {
 				iPlayerPosition = ePlayerPosition.FOUR.getiPlayerPosition();
 				break;
 			}
-		}
-		else
-		{
+		} else {
 			iPlayerPosition = 0;
 		}
-		
+
 		mainApp.getPlayer().setiPlayerPosition(iPlayerPosition);
 		Action act = new Action(btnSitLeave.isSelected() ? eAction.Sit : eAction.Leave, mainApp.getPlayer());
 		act.setiPlayerPosition(iPlayerPosition);
@@ -145,88 +159,93 @@ public class PokerTableController {
 		mainApp.messageSend(act);
 	}
 
-	public void btnSitLeave_Response(Table HubPokerTable) {
-	
+	public void Handle_TableState(Table HubPokerTable) {
+
 		lblPos1Name.setText("");
 		lblPos2Name.setText("");
 		lblPos3Name.setText("");
 		lblPos4Name.setText("");
+
+		//scanInputControls(OuterBorderPane, "SitLeave",true);
 		
 		btnPos1SitLeave.setVisible(true);
 		btnPos2SitLeave.setVisible(true);
 		btnPos3SitLeave.setVisible(true);
 		btnPos4SitLeave.setVisible(true);
-		
-		btnPos1SitLeave.setText(btnPos1SitLeave.isSelected()? "Leave": "Sit");
-		btnPos2SitLeave.setText(btnPos2SitLeave.isSelected()? "Leave": "Sit");
-		btnPos3SitLeave.setText(btnPos3SitLeave.isSelected()? "Leave": "Sit");
-		btnPos4SitLeave.setText(btnPos4SitLeave.isSelected()? "Leave": "Sit");
-		
+
+		btnPos1SitLeave.setText(btnPos1SitLeave.isSelected() ? "Leave" : "Sit");
+		btnPos2SitLeave.setText(btnPos2SitLeave.isSelected() ? "Leave" : "Sit");
+		btnPos3SitLeave.setText(btnPos3SitLeave.isSelected() ? "Leave" : "Sit");
+		btnPos4SitLeave.setText(btnPos4SitLeave.isSelected() ? "Leave" : "Sit");
+
+		btnStartGame.setDisable(HubPokerTable.getHashPlayers().size() > 0 ? false : true);
+
+		FadeButton(btnStartGame);
 		Iterator it = HubPokerTable.getHashPlayers().entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry pair = (Map.Entry) it.next();
 			Player p = (Player) pair.getValue();
 			switch (p.getiPlayerPosition()) {
 			case 1:
-				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID()))
-				{
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID())) {
 					btnPos1SitLeave.setVisible(true);
 					btnPos2SitLeave.setVisible(false);
 					btnPos3SitLeave.setVisible(false);
 					btnPos4SitLeave.setVisible(false);
-				}
-				else
-				{
+				} else {
 					btnPos1SitLeave.setVisible(false);
 				}
 				lblPos1Name.setText(p.getPlayerName().toString());
 				break;
 			case 2:
-				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID()))
-				{
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID())) {
 					btnPos1SitLeave.setVisible(false);
 					btnPos2SitLeave.setVisible(true);
 					btnPos3SitLeave.setVisible(false);
 					btnPos4SitLeave.setVisible(false);
-				}		
-				else
-				{
+				} else {
 					btnPos2SitLeave.setVisible(false);
-				}				
+				}
 				lblPos2Name.setText(p.getPlayerName().toString());
 				break;
 			case 3:
-				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID()))
-				{
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID())) {
 					btnPos1SitLeave.setVisible(false);
 					btnPos2SitLeave.setVisible(false);
 					btnPos3SitLeave.setVisible(true);
 					btnPos4SitLeave.setVisible(false);
-				}		
-				else
-				{
+				} else {
 					btnPos3SitLeave.setVisible(false);
-				}				
+				}
 				lblPos3Name.setText(p.getPlayerName().toString());
 				break;
 			case 4:
-				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID()))
-				{
+				if (p.getPlayerID().equals(mainApp.getPlayer().getPlayerID())) {
 					btnPos1SitLeave.setVisible(false);
 					btnPos2SitLeave.setVisible(false);
 					btnPos3SitLeave.setVisible(false);
 					btnPos4SitLeave.setVisible(true);
-				}		
-				else
-				{
+				} else {
 					btnPos4SitLeave.setVisible(false);
-				}				
+				}
 				lblPos4Name.setText(p.getPlayerName().toString());
 				break;
 			}
 		}
 	}
 
+	public void Handle_GameState(GamePlay HubGamePlay) 
+	{
+		/*
+		imgViewDealerButtonPos1.setVisible(false);
+		imgViewDealerButtonPos2.setVisible(false);
+		imgViewDealerButtonPos3.setVisible(false);
+		imgViewDealerButtonPos4.setVisible(false);
+		*/
+
+		//TODO - Lab #5: Check to see if you're the dealer..  If you are, make the imgViewDealerButtonX visible = true
+		
+	}
 	@FXML
 	void btnStart_Click(ActionEvent event) {
 		Action act = new Action(eAction.StartGame, mainApp.getPlayer());
@@ -244,18 +263,44 @@ public class PokerTableController {
 		Button btnFold = (Button) event.getSource();
 		Action act = new Action(eAction.Fold, mainApp.getPlayer());
 		act.setiPlayerPosition(mainApp.getPlayer().getiPlayerPosition());
-		mainApp.messageSend(act);		
+		mainApp.messageSend(act);
 	}
-	
+
 	@FXML
 	public void btnCheck_Click(ActionEvent event) {
 		Button btnFold = (Button) event.getSource();
 		Action act = new Action(eAction.Fold, mainApp.getPlayer());
 		act.setiPlayerPosition(mainApp.getPlayer().getiPlayerPosition());
-		mainApp.messageSend(act);		
-	}	
+		mainApp.messageSend(act);
+	}
 
+	private void scanInputControls(Pane parent, String strControlStartsWith, boolean bVisible) {
+	    for (Node component : parent.getChildren()) {
+	        if (component instanceof Pane) {
+	            //if the component is a container, scan its children
+	            scanInputControls((Pane) component, strControlStartsWith, bVisible);
+	        } else if (component instanceof TextField) {
+	        }
+	        else if (component instanceof Button)
+	        {
+	        	Button b = (Button)component;	        	
+	        	if ((b.getId() != null) && (b.getId().endsWith(strControlStartsWith)))
+	        	{
+	        		System.out.println(b.getId());
+	        		b.setVisible(bVisible);
+	        	}
+	        }
+	    }
+	}
+	
+	private void FadeButton(Button btn) {
+		FadeTransition ft = new FadeTransition(Duration.millis(3000), btn);
+		ft.setFromValue(1.0);
+		ft.setToValue(0.3);
+		ft.setCycleCount(4);
+		ft.setAutoReverse(true);
 
+		ft.play();
+	}
 
 }
-

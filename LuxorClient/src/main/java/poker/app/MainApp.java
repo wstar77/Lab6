@@ -117,7 +117,6 @@ public class MainApp extends Application {
 		try {
 			pClient = new PokerClient(strComputerName, iPort);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -249,11 +248,18 @@ public class MainApp extends Application {
 				}
 				else if (message instanceof Table)
 				{				
-					System.out.println("State of table: message receieved by client");
-					System.out.println("MainApp PlayerID: " + getPlayer().getPlayerID());
-					Table.StateOfTable((Table)message);						
-					pokerController.btnSitLeave_Response((Table)message);
+					//	The table changed...  poker table should react to new state of table
+					pokerController.Handle_TableState((Table)message);
+					
+					//	This will refresh the info box in the table... will go away when game
+					//	is finished
 					pokerController.setlblNumberOfPlayers((Table)message);
+				}
+				else if (message instanceof GamePlay)
+				{
+					pokerController.Handle_GameState((GamePlay)message);
+			
+					//	The game changed...  poker table should react to the new state of game
 				}
 			});
 		}

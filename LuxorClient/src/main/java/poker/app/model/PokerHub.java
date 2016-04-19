@@ -43,7 +43,7 @@ public class PokerHub extends Hub {
 		shutDownHub();
 	}
 
-	protected void messageReceived(int playerID, Object message) {
+	protected void messageReceived(int ClientID, Object message) {
 
 		if (message instanceof Action) {
 			Action act = (Action) message;
@@ -69,29 +69,51 @@ public class PokerHub extends Hub {
 				
 			case StartGame:
 				System.out.println("Starting Game!");
-				// Get the Rule
-				Rule r = new Rule(eGame.FiveStud);
-				// Start the new Game
-				HubGamePlay = new GamePlay(r);
-
-				// Add the seated players to the game
-				Iterator it = HubPokerTable.getHashPlayers().entrySet().iterator();
-				while (it.hasNext()) {
-					Map.Entry pair = (Map.Entry) it.next();
-					HubGamePlay.addPlayerToGame((Player) pair.getValue());
-					
-					GamePlayPlayerHand GPPH = new GamePlayPlayerHand(HubGamePlay,(Player) pair.getValue());
-					HubGamePlay.addGamePlayPlayerHand(GPPH);					
-				}
-
-				// Create the deck
-				HubGamePlay.setGameDeck(new Deck());
-				iDealNbr = 0;
+				//TODO - Lab #5 Do all the things you need to do to start a game!!
 				
+				//	Determine which game is selected (from RootTableController)
+				//		1 line of code
+				
+				//	Get the Rule based on the game selected
+				//		1 line of code
+
+				//	The table should eventually allow multiple instances of 'GamePlay'...
+				//		Each game played is an instance of 'GamePlay'...
+				//		For the first instance of GamePlay, pick a random player to be the 
+				//		'Dealer'...  
+				//		< 5 lines of code to pick random player
+				
+				//	Start a new instance of GamePlay, based on rule set and Dealer (Player.PlayerID)
+				//		1 line of code
+				
+				//	There are 1+ players seated at the table... add these players to the game
+				//		< 5 lines of code
+				
+				//	GamePlay has a deck...  create the deck based on the game's rules (the rule
+				//		will have number of jokers... wild cards...
+				//		1 line of code
+
+				//	Determine the order of players and add each player in turn to GamePlay.lnkPlayerOrder
+				//	Example... four players playing...  seated in Position 1, 2, 3, 4
+				//			Dealer = Position 2
+				//			Order should be 3, 4, 1, 2
+				//	Example...  three players playing... seated in Position 1, 2, 4
+				//			Dealer = Position 4
+				//			Order should be 1, 2, 4
+				//		< 10 lines of code
+				
+				//	Set PlayerID_NextToAct in GamePlay (next player after Dealer)
+				//		1 line of code
+				
+				//	Here's how to get an eNum based on a given value (Merry Christmas):)
+				eGame Game = eGame.getGame(1);
+
+				//	Send the state of the game back to the players
 				sendToAll(HubGamePlay);
 				break;
 			case Deal:
 				
+				/*
 				int iCardstoDraw[] = HubGamePlay.getRule().getiCardsToDraw();
 				int iDrawCount = iCardstoDraw[iDealNbr];
 
@@ -103,13 +125,12 @@ public class PokerHub extends Hub {
 						e.printStackTrace();
 					}
 				}
-
+*/
 				break;
 			}
 		}
 
 		System.out.println("Message Received by Hub");
 	}
-
 
 }

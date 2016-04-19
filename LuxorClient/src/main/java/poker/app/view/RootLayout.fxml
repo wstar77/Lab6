@@ -9,20 +9,6 @@
    <top>
       <MenuBar fx:id="mb" prefHeight="0.0" prefWidth="1064.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Game">
-            <items>
-                  <RadioMenuItem fx:id="oneJoker" mnemonicParsing="false" text="5 Card Joker Poker">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="tglGames" />
-                     </toggleGroup></RadioMenuItem>
-                  <RadioMenuItem fx:id="twoJoker" mnemonicParsing="false" text="5 Card Wild Card Joker" toggleGroup="$tglGames" />
-                  <RadioMenuItem fx:id="FCD" mnemonicParsing="false" text="5 Card Draw" toggleGroup="$tglGames" />
-                  <RadioMenuItem fx:id="SCD" mnemonicParsing="false" text="7 Card Draw" toggleGroup="$tglGames" />
-                  <RadioMenuItem fx:id="Texas" mnemonicParsing="false" text="Texas Hold'em" toggleGroup="$tglGames" />
-                  <RadioMenuItem fx:id="Omaha" mnemonicParsing="false" text="Omaha" toggleGroup="$tglGames" />
-                  <RadioMenuItem mnemonicParsing="false" text="Close" toggleGroup="$tglGames" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />

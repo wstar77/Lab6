@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="1350.0" style="-fx-background-color: green;" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poker.app.view.PokerTableController">
+<BorderPane fx:id="OuterBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="1350.0" style="-fx-background-color: green;" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poker.app.view.PokerTableController">
    <bottom>
       <HBox alignment="CENTER" prefHeight="109.0" prefWidth="850.0" style="-fx-background-color: green;" BorderPane.alignment="CENTER">
          <children>
@@ -52,6 +52,11 @@
                         <FlowPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <ToggleButton id="btnPos1SitLeave" fx:id="btnPos1SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_Click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
+                              <ImageView id="imgViewDealerButtonPos1" fx:id="imgViewDealerButtonPos1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../resources/img/d-button.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </FlowPane>
                      </children>
@@ -91,6 +96,11 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <ToggleButton id="btnPos3SitLeave" fx:id="btnPos3SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_Click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
+                        <ImageView id="imgViewDealerButtonPos3" fx:id="imgViewDealerButtonPos3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../resources/img/d-button.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </HBox>
                </children>
@@ -116,7 +126,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button id="btnStart" mnemonicParsing="false" onAction="#btnStart_Click" prefWidth="80.0" text="Start" />
+                        <Button id="btnStartGame" fx:id="btnStartGame" mnemonicParsing="false" onAction="#btnStart_Click" prefWidth="80.0" text="Start" />
                         <Button id="btnDeal" mnemonicParsing="false" onAction="#btnDeal_Click" prefWidth="80.0" text="Deal" />
                      </children>
                   </HBox>
@@ -171,6 +181,11 @@
                         <FlowPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <ToggleButton id="btnPos2SitLeave" fx:id="btnPos2SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_Click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
+                              <ImageView id="imgViewDealerButtonPos2" fx:id="imgViewDealerButtonPos2" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../resources/img/d-button.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </FlowPane>
                      </children>
@@ -223,6 +238,11 @@
                         <FlowPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <ToggleButton id="btnPos4SitLeave" fx:id="btnPos4SitLeave" mnemonicParsing="false" onAction="#btnSitLeave_Click" styleClass="togglebutton" stylesheets="@DarkTheme.css" text="Sit" />
+                              <ImageView id="imgViewDealerButtonPos4" fx:id="imgViewDealerButtonPos4" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../resources/img/d-button.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </FlowPane>
                      </children>
