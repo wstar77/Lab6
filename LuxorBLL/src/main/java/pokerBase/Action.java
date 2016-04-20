@@ -18,8 +18,6 @@ public class Action implements Serializable {
 	@XmlElement
 	private Player ActPlayer;
 	
-	private int iPlayerPosition;
-	
 	public Action()
 	{
 		
@@ -44,14 +42,5 @@ public class Action implements Serializable {
 	public void setPlayer(Player player) {
 		this.ActPlayer = player;
 	}
-	public int getiPlayerPosition() {
-		return iPlayerPosition;
-	}
-	public void setiPlayerPosition(int iPlayerPosition) {
-		this.iPlayerPosition = iPlayerPosition;
-	}
-
-	
-	
 	
 }

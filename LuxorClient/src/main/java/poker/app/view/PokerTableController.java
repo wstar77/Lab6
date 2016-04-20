@@ -154,7 +154,6 @@ public class PokerTableController {
 
 		mainApp.getPlayer().setiPlayerPosition(iPlayerPosition);
 		Action act = new Action(btnSitLeave.isSelected() ? eAction.Sit : eAction.Leave, mainApp.getPlayer());
-		act.setiPlayerPosition(iPlayerPosition);
 
 		mainApp.messageSend(act);
 	}
@@ -262,7 +261,6 @@ public class PokerTableController {
 	public void btnFold_Click(ActionEvent event) {
 		Button btnFold = (Button) event.getSource();
 		Action act = new Action(eAction.Fold, mainApp.getPlayer());
-		act.setiPlayerPosition(mainApp.getPlayer().getiPlayerPosition());
 		mainApp.messageSend(act);
 	}
 
@@ -270,7 +268,6 @@ public class PokerTableController {
 	public void btnCheck_Click(ActionEvent event) {
 		Button btnFold = (Button) event.getSource();
 		Action act = new Action(eAction.Fold, mainApp.getPlayer());
-		act.setiPlayerPosition(mainApp.getPlayer().getiPlayerPosition());
 		mainApp.messageSend(act);
 	}
 

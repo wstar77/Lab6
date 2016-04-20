@@ -57,7 +57,6 @@ public class PokerHub extends Hub {
 				break;
 			case Sit:
 				resetOutput();
-				act.getPlayer().setiPlayerPosition(act.getiPlayerPosition());
 				HubPokerTable.AddPlayerToTable(act.getPlayer());				
 				sendToAll(HubPokerTable);				
 				break;

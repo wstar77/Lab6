@@ -187,7 +187,6 @@ public class MainApp extends Application {
 			
 			getPlayer().setiPlayerPosition(0);
 			Action act = new Action(eAction.TableState, getPlayer());
-			act.setiPlayerPosition(0);
 			messageSend(act);
 
 		} catch (IOException e) {
@@ -228,6 +227,7 @@ public class MainApp extends Application {
 		protected void messageSend(Object message)
 		{
 			System.out.println("PokerClient.messageSend");
+			resetOutput();
 			super.send(message);
 		}
 		

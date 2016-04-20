@@ -16,6 +16,15 @@ public class CardDraw {
 		CardDestination = cardDestination;
 		CardVisibility = CardVisibility;
 	}
+	public eCardCount getCardCount() {
+		return CardCount;
+	}
+	public eCardDestination getCardDestination() {
+		return CardDestination;
+	}
+	public eCardVisibility getCardVisibility() {
+		return CardVisibility;
+	}
 	
 	
 }
