@@ -97,19 +97,7 @@ public class RootLayoutController implements Initializable {
 			mnuGame.getItems().add(rmi);
 		}
 		
-		Menu mnuBet = new Menu();
-		mnuBet.setText("Betting");
-		mb.getMenus().add(1,mnuBet);
-		ToggleGroup tglBet = new ToggleGroup();
-		
-		RadioMenuItem rmi1 = new RadioMenuItem("No Limit");
-		rmi1.setSelected(true);
-		rmi1.setToggleGroup(tglBet);
-		RadioMenuItem rmi2 = new RadioMenuItem("Pot Limit");
-		rmi2.setToggleGroup(tglBet);
-		
-		mnuBet.getItems().add(rmi1);
-		mnuBet.getItems().add(rmi2);
+
 		
 		//	TODO - Lab #5...  Add a new menu item that will display the betting rules...
 		//	Two choices:

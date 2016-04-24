@@ -72,7 +72,6 @@ public class PokerHub extends Hub {
 				//System.out.println("Starting Game!");
 				resetOutput();
 				
-				
 				//TODO - Lab #5 Do all the things you need to do to start a game!!
 				
 				//	Determine which game is selected (from RootTableController)
@@ -81,34 +80,24 @@ public class PokerHub extends Hub {
 				//	Get the Rule based on the game selected
 				//		1 line of code
 
-				Rule rle = new Rule(act.geteGame());
-				
+			
 				//	The table should eventually allow multiple instances of 'GamePlay'...
 				//		Each game played is an instance of 'GamePlay'...
 				//		For the first instance of GamePlay, pick a random player to be the 
 				//		'Dealer'...  
 				//		< 5 lines of code to pick random player
 				
-				Player p = HubPokerTable.PickRandomPlayerAtTable();
-				System.out.println("Random Player: " + p.getiPlayerPosition() );
-
-				
-				
 				
 				//	Start a new instance of GamePlay, based on rule set and Dealer (Player.PlayerID)
 				//		1 line of code
 				
-				HubGamePlay = new GamePlay(rle, p.getPlayerID());
-				
 				
 				//	There are 1+ players seated at the table... add these players to the game
 				//		< 5 lines of code
-				HubGamePlay.setGamePlayers(HubPokerTable.getHashPlayers());
 				
 				//	GamePlay has a deck...  create the deck based on the game's rules (the rule
 				//		will have number of jokers... wild cards...
 				//		1 line of code
-				HubGamePlay.setGameDeck(new Deck(rle.GetNumberOfJokers(),rle.GetWildCards()));
 
 				//	Determine the order of players and add each player in turn to GamePlay.lnkPlayerOrder
 				//	Example... four players playing...  seated in Position 1, 2, 3, 4
@@ -118,13 +107,11 @@ public class PokerHub extends Hub {
 				//			Dealer = Position 4
 				//			Order should be 1, 2, 4
 				//		< 10 lines of code
-				HubGamePlay.setiActOrder(GamePlay.GetOrder(p.getiPlayerPosition()));
 				
 				
 				//	Set PlayerID_NextToAct in GamePlay (next player after Dealer)
 				//		1 line of code
 				
-				HubGamePlay.setPlayerNextToAct(HubGamePlay.getPlayerByPosition(GamePlay.NextPosition(p.getiPlayerPosition(), GamePlay.GetOrder(p.getiPlayerPosition()))));
 
 				//	Send the state of the game back to the players
 				sendToAll(HubGamePlay);
