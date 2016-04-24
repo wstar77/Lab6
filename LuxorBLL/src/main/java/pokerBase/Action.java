@@ -1,7 +1,7 @@
 package pokerBase;
 
 import pokerEnums.eAction;
-
+import pokerEnums.eGame;
 import java.io.Serializable;
 
 import javax.xml.bind.JAXBContext;
@@ -17,6 +17,8 @@ public class Action implements Serializable {
 
 	@XmlElement
 	private Player ActPlayer;
+	
+	private eGame eGame;
 	
 	public Action()
 	{
@@ -41,6 +43,12 @@ public class Action implements Serializable {
 	}
 	public void setPlayer(Player player) {
 		this.ActPlayer = player;
+	}
+	public eGame geteGame() {
+		return eGame;
+	}
+	public void seteGame(eGame eGame) {
+		this.eGame = eGame;
 	}
 	
 }

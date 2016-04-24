@@ -211,8 +211,13 @@ public class MainApp extends Application {
 
 	public void messageSend(final Object message)
 	{
-		System.out.println("Sending message " + pClient.getID() );
+		//System.out.println("Sending message " + pClient.getID() );
 		pClient.messageSend(message);	
+	}
+	
+	public String getRuleName()
+	{
+		return rootController.getRuleName();
 	}
 	
 	private class PokerClient extends Client {
@@ -226,7 +231,7 @@ public class MainApp extends Application {
 		 */
 		protected void messageSend(Object message)
 		{
-			System.out.println("PokerClient.messageSend");
+			//System.out.println("PokerClient.messageSend");
 			resetOutput();
 			super.send(message);
 		}
@@ -240,7 +245,7 @@ public class MainApp extends Application {
 		 */
 		@Override
 		protected void messageReceived(final Object message) {
-			System.out.println("Receiving message " + getID() );
+			//System.out.println("Receiving message " + getID() );
 			Platform.runLater(() -> {		
 				if (message instanceof String)
 				{				

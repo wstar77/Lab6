@@ -24,7 +24,7 @@ public class Rule implements Serializable {
 		private int CommunityCardsMin;
 		private int CommunityCardsMax;
 		private int PossibleHandCombinations;
-		private ArrayList<Card> RuleCards = new ArrayList<Card>();
+		private ArrayList<Card> WildCards = new ArrayList<Card>();
 		private HashMap hmCardDraw = new HashMap<Integer, CardDraw>();
 		
 		private LinkedList<CardDraw> CardDraw = new LinkedList<CardDraw>();
@@ -152,10 +152,10 @@ public class Rule implements Serializable {
 				this.MaxNumberOfPlayers = 4;
 				this.PlayerNumberOfCards = 5;
 				this.NumberOfJokers = 0;
-				this.RuleCards.add(new Card(eSuit.DIAMONDS, eRank.TWO, 40));
-				this.RuleCards.add(new Card(eSuit.HEARTS, eRank.TWO, 1));
-				this.RuleCards.add(new Card(eSuit.SPADES, eRank.TWO, 14));
-				this.RuleCards.add(new Card(eSuit.CLUBS, eRank.TWO, 27));
+				this.WildCards.add(new Card(eSuit.DIAMONDS, eRank.TWO, 40));
+				this.WildCards.add(new Card(eSuit.HEARTS, eRank.TWO, 1));
+				this.WildCards.add(new Card(eSuit.SPADES, eRank.TWO, 14));
+				this.WildCards.add(new Card(eSuit.CLUBS, eRank.TWO, 27));
 				this.PlayerCardsMin = 5;
 				this.PlayerCardsMax = 5;			
 				this.CommunityCardsMin = 0;
@@ -172,14 +172,14 @@ public class Rule implements Serializable {
 				this.MaxNumberOfPlayers = 4;
 				this.PlayerNumberOfCards = 2;
 				this.NumberOfJokers = 0;
-				this.RuleCards.add(new Card(eSuit.DIAMONDS, eRank.ACE, 52));
-				this.RuleCards.add(new Card(eSuit.HEARTS, eRank.ACE, 13));
-				this.RuleCards.add(new Card(eSuit.SPADES, eRank.ACE, 26));
-				this.RuleCards.add(new Card(eSuit.CLUBS, eRank.ACE, 39));
-				this.RuleCards.add(new Card(eSuit.DIAMONDS, eRank.EIGHT, 46));
-				this.RuleCards.add(new Card(eSuit.HEARTS, eRank.EIGHT, 7));
-				this.RuleCards.add(new Card(eSuit.SPADES, eRank.EIGHT, 20));
-				this.RuleCards.add(new Card(eSuit.CLUBS, eRank.EIGHT, 33));
+				this.WildCards.add(new Card(eSuit.DIAMONDS, eRank.ACE, 52));
+				this.WildCards.add(new Card(eSuit.HEARTS, eRank.ACE, 13));
+				this.WildCards.add(new Card(eSuit.SPADES, eRank.ACE, 26));
+				this.WildCards.add(new Card(eSuit.CLUBS, eRank.ACE, 39));
+				this.WildCards.add(new Card(eSuit.DIAMONDS, eRank.EIGHT, 46));
+				this.WildCards.add(new Card(eSuit.HEARTS, eRank.EIGHT, 7));
+				this.WildCards.add(new Card(eSuit.SPADES, eRank.EIGHT, 20));
+				this.WildCards.add(new Card(eSuit.CLUBS, eRank.EIGHT, 33));
 				this.PlayerCardsMin = 5;
 				this.PlayerCardsMax = 5;			
 				this.CommunityCardsMin = 0;
@@ -212,9 +212,9 @@ public class Rule implements Serializable {
 			return this.CommunityCardsMax;
 		}
 		
-		public ArrayList<Card> GetRuleCards()
+		public ArrayList<Card> GetWildCards()
 		{
-			return this.RuleCards;
+			return this.WildCards;
 		}
 		public eGame GetGame()
 		{

@@ -1,11 +1,13 @@
 package pokerBase;
 
+import java.io.Serializable;
+
 import pokerEnums.eCardCount;
 import pokerEnums.eCardDestination;
 import pokerEnums.eCardVisibility;
 
 
-public class CardDraw {
+public class CardDraw implements Serializable {
 
 	private eCardCount CardCount;
 	private eCardDestination CardDestination;

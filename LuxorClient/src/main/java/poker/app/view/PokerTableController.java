@@ -56,6 +56,7 @@ import pokerBase.Hand;
 import pokerBase.Player;
 import pokerBase.Table;
 import pokerEnums.eAction;
+import pokerEnums.eGame;
 import pokerEnums.ePlayerPosition;
 
 public class PokerTableController {
@@ -247,7 +248,11 @@ public class PokerTableController {
 	}
 	@FXML
 	void btnStart_Click(ActionEvent event) {
-		Action act = new Action(eAction.StartGame, mainApp.getPlayer());
+		Action act = new Action(eAction.StartGame, mainApp.getPlayer());		
+		int iRuleNbr = Integer.parseInt(mainApp.getRuleName().replace("PokerGame", ""));
+		eGame Game = eGame.getGame(iRuleNbr);
+		act.seteGame(Game);
+		
 		mainApp.messageSend(act);
 	}
 

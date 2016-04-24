@@ -2,9 +2,11 @@ package pokerBase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -43,6 +45,29 @@ public class Table implements Serializable {
 	}
 	public HashMap getHashPlayers() {
 		return HashMapPlayer;
+	}
+	
+	public Player getPlayerByPosition(int iPlayerPosition)
+	{
+		Player pl = null;
+		
+		Iterator it = getHashPlayers().entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			Player p = (Player)pair.getValue();
+			if (p.getiPlayerPosition() == iPlayerPosition)
+				pl = p;
+		}
+		
+		return pl;
+	}
+	
+	public Player PickRandomPlayerAtTable()
+	{
+		List<Player> listPlayers = new ArrayList<Player>(getHashPlayers().values());
+		Collections.shuffle(listPlayers);
+		return listPlayers.get(0);
+		
 	}
 	public static Table CloneTable(Table t)
 	{
